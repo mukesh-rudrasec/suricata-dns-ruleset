@@ -1,1 +1,2 @@
 alert dns any any <> any any (msg:"DNS query resolved to $HOME_NET address"; pcre:"/(?:\x0A[\x00-\xFF]{3}|\xAC[\x10-\x1F][\x00-\xFF]{2}|\xC0\xA8[\x00-\xFF]{2})$/"; sid:9900001; rev:1;)
+alert dns any any <> any any (msg:"DNS query resolved to $HOME_NET address for hostname %{dns.query}"; content:"|01 00 00 01|"; depth: 4; offset: 2; pcre:"/\x0A([\x00-\xFF]{3}|\xAC[\x10-\x1F][\x00-\xFF]{2}|\xC0\xA8[\x00-\xFF]{2})$/"; sid:9900002; rev:2;)
